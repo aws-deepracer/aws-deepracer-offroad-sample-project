@@ -313,7 +313,7 @@ The deepracer_offroad_launcher.py included in this package is the main launcher 
 
 First person view of how the DeepRacer navigates through a setup path:
 
-[deepracer-offroad-demo](/media/deepracer-offroad-demo.gif)
+![deepracer-offroad-demo](/media/deepracer-offroad-demo.gif)
 
 
 ## Resources

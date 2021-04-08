@@ -172,7 +172,7 @@ Hence, using this pipeline for Perception - Decision - Action on a loop, the Dee
 
 First person view of how the DeepRacer navigates through a setup path:
 
-[deepracer-offroad-demo](/media/deepracer-offroad-demo.gif)
+![deepracer-offroad-demo](/media/deepracer-offroad-demo.gif)
 
 
 ## Possible next steps:
