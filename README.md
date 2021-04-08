@@ -1,4 +1,4 @@
-# AWS DeepRacer DeepRacer Offroad Launcher Package
+# AWS DeepRacer Offroad Launcher Package
 
 ## Overview
 
