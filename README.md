@@ -1,5 +1,9 @@
 # AWS DeepRacer Offroad Launcher Package
 
+<p align="center">
+<img src="/media/deepracer_circle_sticker.png" width="250" height="250" >
+</p>
+
 ## Overview
 
 The DeepRacer Offroad sample project is a sample application built on top of the existing AWS DeepRacer application which uses QR Code detection through which the AWS DeepRacer device can identify and navigate through a path setup using QR Codes to guide the car. For detailed information on DeepRacer Offroad sample project, see DeepRacer Offroad sample project [Getting Started](https://github.com/aws-deepracer/aws-deepracer-offroad-sample-project/blob/main/getting-started.md) section.
