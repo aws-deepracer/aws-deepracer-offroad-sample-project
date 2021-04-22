@@ -72,7 +72,7 @@ There are six packages (ROS Nodes) that are of importance for the DeepRacer Offr
 
 1. [DeepRacer Offroad Navigation Pkg](https://github.com/aws-deepracer/aws-deepracer-offroad-sample-project/tree/main/deepracer_offroad_ws/deepracer_offroad_navigation_pkg) - Package responsible for collecting the delta results from qr detection and mapping it to the servo message with throttle and steering angle values.
 
-1. [DeepRacer Offroad Launcher Package](https://github.com/aws-deepracer/aws-deepracer-offroad-sample-project/tree/main/deepracer_offroad_ws/deepracer_offroad_launcher) - The DeepRacer Interfaces ROS package is a foundational package that creates the custom service and message types that are used in the core AWS DeepRacer application, but has been modified to support Deepracer Offroad sample project.
+1. [DeepRacer Offroad Launcher Package](https://github.com/aws-deepracer/aws-deepracer-offroad-sample-project/tree/main/deepracer_offroad_ws/deepracer_offroad_launcher) - The DeepRacer Offroad Launcher Package is the package responsible for launching all the required nodes for the DeepRacer Offroad sample project, including the launch setup for nodes from the AWS DeepRacer core application.
 
 1. [Control Package](https://github.com/aws-deepracer/aws-deepracer-offroad-sample-project/tree/main/deepracer_offroad_ws/ctrl_pkg) - Package extended from AWS DeepRacer core application and responsible for creating main node with services exposed to be used by webserver backend API calls. This manages the mode of the car: manual, autonomous, calibration or offroad.
 
