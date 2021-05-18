@@ -6,36 +6,37 @@
 
 ## Overview
 
-The DeepRacer Offroad sample project is a sample application built on top of the existing AWS DeepRacer application which uses QR Code detection through which the AWS DeepRacer device can identify and navigate through a path setup using QR Codes to guide the car. For detailed information on DeepRacer Offroad sample project, see DeepRacer Offroad sample project [Getting Started](https://github.com/aws-deepracer/aws-deepracer-offroad-sample-project/blob/main/getting-started.md) section.
+The AWS DeepRacer Offroad sample project is a sample application built on top of the existing AWS DeepRacer application which uses QR code detection through which the AWS DeepRacer device can identify and navigate along a path set up using QR codes to guide the car. For detailed information on the AWS DeepRacer Offroad sample project, see AWS DeepRacer Offroad sample project [getting started documentation](https://github.com/aws-deepracer/aws-deepracer-offroad-sample-project/blob/main/getting-started.md).
 
 ## License
 
 The source code is released under [Apache 2.0](https://aws.amazon.com/apache-2-0/).
 
 ## Installation
+Follow these steps to install the AWS DeepRacer Offroad sample project.
 
 ### Prerequisites
 
-The AWS DeepRacer device comes with all the pre-requisite packages and libraries installed to run the DeepRacer Offroad sample project. More details about pre installed set of packages and libraries on the DeepRacer, and installing required build systems can be found in the [Getting Started](https://github.com/aws-deepracer/aws-deepracer-launcher/blob/main/getting-started.md) section of the AWS DeepRacer Opensource page. DeepRacer Offroad sample project requires the AWS DeepRacer application to be installed on the device as it leverages most of the packages from the core application.
+The AWS DeepRacer device comes with all the prerequisite packages and libraries installed to run the AWS DeepRacer Offroad sample project. For more information about the pre-installed set of packages and libraries on the AWS DeepRacer and about installing the required build systems, see [Getting started with AWS DeepRacer OpenSource](https://github.com/aws-deepracer/aws-deepracer-launcher/blob/main/getting-started.md). The AWS DeepRacer Offroad sample project requires the AWS DeepRacer application to be installed on the device as it leverages most of the packages from the core application.
 
-The following are the additional software requirements to get the DeepRacer Offroad sample project to work on the AWS DeepRacer device.
+The following are additional software requirements to get the AWS DeepRacer Offroad sample project to work on the AWS DeepRacer device.
 
-1. **Calibrate the AWS DeepRacer (optional):** Follow the [instructions](https://docs.aws.amazon.com/deepracer/latest/developerguide/deepracer-calibrate-vehicle.html) to calibrate the mechanics of your AWS DeepRacer Vehicle. This should be done so that the vehicle performance is optimal and it behaves as expected.
+1. **Calibrate the AWS DeepRacer (optional):** Follow the [instructions](https://docs.aws.amazon.com/deepracer/latest/developerguide/deepracer-calibrate-vehicle.html) to calibrate the mechanics of your AWS DeepRacer vehicle. This should be done so that the vehicle performance is optimal and it behaves as expected.
 
 
-## Downloading and Building
+## Downloading and building
 
-Open up a terminal on the DeepRacer device and run the following commands as root user.
+Open a terminal on the AWS DeepRacer device and run the following commands as the root user.
 
-1. Switch to root user before you source the ROS2 installation:
+1. Switch to the root user before you source the ROS 2 installation:
 
         sudo su
 
-1. Stop the deepracer-core.service that is currently running on the device:
+1. Stop the `deepracer-core.service` that is currently running on the device:
 
         systemctl stop deepracer-core
 
-1. Source the ROS2 Foxy setup bash script:
+1. Source the ROS 2 Foxy setup bash script:
 
         source /opt/ros/foxy/setup.bash 
 
@@ -48,12 +49,12 @@ Open up a terminal on the DeepRacer device and run the following commands as roo
         mkdir -p ~/deepracer_ws
         cd ~/deepracer_ws
 
-1. Clone the entire DeepRacer Offroad sample project on the DeepRacer device.
+1. Clone the entire AWS DeepRacer Offroad sample project on the AWS DeepRacer device.
 
         git clone https://github.com/aws-deepracer/aws-deepracer-offroad-sample-project.git
         cd ~/deepracer_ws/aws-deepracer-offroad-sample-project/deepracer_offroad_ws/
 
-1. Clone the async_web_server_cpp, web_video_server, rplidar_ros and pyzbar dependency packages on the DeepRacer device:
+1. Clone the `async_web_server_cpp`, `web_video_server`, `rplidar_ros`, and `pyzbar dependency` packages on the AWS DeepRacer device:
 
         cd ~/deepracer_ws/aws-deepracer-offroad-sample-project/deepracer_offroad_ws/ && ./install_dependencies.sh
 
@@ -66,22 +67,23 @@ Open up a terminal on the DeepRacer device and run the following commands as roo
 
         cd ~/deepracer_ws/aws-deepracer-offroad-sample-project/deepracer_offroad_ws/ && rosdep install -i --from-path . --rosdistro foxy -y
 
-1. Build the packages in the workspace
+1. Build the packages in the workspace:
 
         cd ~/deepracer_ws/aws-deepracer-offroad-sample-project/deepracer_offroad_ws/ && colcon build
 
 
 ## Usage
+To use the AWS DeepRacer Offroad sample application, follow these instructions.
 
 ### Run the node
 
-To launch the DeepRacer Offroad sample application as root user on the AWS DeepRacer device open up another terminal on the device and run the following commands as root user:
+To launch the AWS DeepRacer Offroad sample application as the root user on the AWS DeepRacer device, open another terminal on the device and run the following commands as the root user:
 
-1. Switch to root user before you source the ROS2 installation:
+1. Switch to the root user before you source the ROS 2 installation:
 
         sudo su
 
-1. Source the ROS2 Foxy setup bash script:
+1. Source the ROS 2 Foxy setup bash script:
 
         source /opt/ros/foxy/setup.bash 
 
@@ -93,23 +95,23 @@ To launch the DeepRacer Offroad sample application as root user on the AWS DeepR
 
         source ~/deepracer_ws/aws-deepracer-offroad-sample-project/deepracer_offroad_ws/install/setup.bash
 
-1. Launch the nodes required for DeepRacer Offroad sample project:
+1. Launch the nodes required for the AWS DeepRacer Offroad sample project:
 
         ros2 launch deepracer_offroad_launcher deepracer_offroad_launcher.py
 
-### Enabling “offroad” mode using CLI:
+### Enabling `offroad` mode using the CLI
 
-Once the deepracer_offroad_launcher has been kicked-off, open up a adjacent new terminal as root user:
+Once the `deepracer_offroad_launcher` has been kicked off, open an adjacent new terminal as the root user:
 
-1. Switch to root user before you source the ROS2 installation:
+1. Switch to the root user before you source the ROS 2 installation:
 
         sudo su
 
-1. Navigate to the DeepRacer Offroad workspace:
+1. Navigate to the AWS DeepRacer Offroad workspace:
 
         cd ~/deepracer_ws/aws-deepracer-offroad-sample-project/deepracer_offroad_ws/
 
-1. Source the ROS2 Foxy setup bash script:
+1. Source the ROS 2 Foxy setup bash script:
 
         source /opt/ros/foxy/setup.bash
 
@@ -117,27 +119,27 @@ Once the deepracer_offroad_launcher has been kicked-off, open up a adjacent new 
 
         source ~/deepracer_ws/aws-deepracer-offroad-sample-project/deepracer_offroad_ws/install/setup.bash
 
-1. Set the mode of the DeepRacer via ctrl_pkg to “offroad” using the below ros2 service call:
+1. Set the mode of the AWS DeepRacer via `ctrl_pkg` to `offroad` using the following ROS 2 service call:
 
         ros2 service call /ctrl_pkg/vehicle_state deepracer_interfaces_pkg/srv/ActiveStateSrv "{state: 3}"
 
-1. Enable “offroad” mode using the below ros2 service call
+1. Enable `offroad` mode using the following ROS 2 service call
 
         ros2 service call /ctrl_pkg/enable_state deepracer_interfaces_pkg/srv/EnableStateSrv "{is_active: True}"
 
-### Changing the MAX_SPEED scale of the DeepRacer:
+### Changing the `MAX_SPEED` scale of the AWS DeepRacer
 
-The MAX_SPEED scale of the DeepRacer can be modified using ros2 service call in case the car isn’t moving as expected. This can occur due to multiple reasons not limited to vehicle battery percentage, surface on which the car is being operated etc.
+The `MAX_SPEED` scale of the AWS DeepRacer can be modified using a ROS 2 service call in case the car isn’t moving as expected. This can occur due to many different reasons, such as the vehicle battery percentage or the surface on which the car is being operated.
 
-1. Switch to root user before you source the ROS2 installation:
+1. Switch to the root user before you source the ROS 2 installation:
 
         sudo su
 
-1. Navigate to the DeepRacer Offroad workspace:
+1. Navigate to the AWS DeepRacer Offroad workspace:
 
         cd ~/deepracer_ws/aws-deepracer-offroad-sample-project/deepracer_offroad_ws/
 
-1. Source the ROS2 Foxy setup bash script:
+1. Source the ROS 2 Foxy setup bash script:
 
         source /opt/ros/foxy/setup.bash
 
@@ -154,9 +156,9 @@ The MAX_SPEED scale of the DeepRacer can be modified using ros2 service call in 
         ros2 service call /deepracer_offroad_navigation_pkg/set_max_speed deepracer_interfaces_pkg/srv/SetMaxSpeedSrv "{max_speed_pct: 0.75}"
 
 
-## Launch Files
+## Launch files
 
-The deepracer_offroad_launcher.py included in this package is the main launcher file that launches all the required nodes for the DeepRacer Offroad sample project. This launcher file also includes the nodes from the AWS DeepRacer core application.
+The `deepracer_offroad_launcher.py` included in this package is the main launcher file that launches all the required nodes for the AWS DeepRacer Offroad sample project. This launcher file also includes the nodes from the AWS DeepRacer core application.
 
         from launch import LaunchDescription
         from launch_ros.actions import Node
@@ -315,14 +317,14 @@ The deepracer_offroad_launcher.py included in this package is the main launcher 
 
 ## Demo
 
-First person view of how the DeepRacer navigates through a setup path:
+The following image shows a first-person view of how the AWS DeepRacer navigates through a set up path:
 
 ![deepracer-offroad-demo](/media/deepracer-offroad-demo.gif)
 
 
 ## Resources
 
-* AWS DeepRacer Opensource getting started: [https://github.com/aws-deepracer/aws-deepracer-launcher/blob/main/getting-started.md](https://github.com/aws-deepracer/aws-deepracer-launcher/blob/main/getting-started.md)
-* DeepRacer Offroad sample project getting started: [https://github.com/aws-deepracer/aws-deepracer-offroad-sample-project/blob/main/getting-started.md](https://github.com/aws-deepracer/aws-deepracer-offroad-sample-project/blob/main/getting-started.md)
-* Instructions to create QR Codes to setup Offroad path: [https://github.com/aws-deepracer/aws-deepracer-offroad-sample-project/blob/main/create-qrcodes-to-setup-offroad-path.md](https://github.com/aws-deepracer/aws-deepracer-offroad-sample-project/blob/main/create-qrcodes-to-setup-offroad-path.md)
-* Instructions to calibrate your AWS DeepRacer: [https://docs.aws.amazon.com/deepracer/latest/developerguide/deepracer-calibrate-vehicle.html](https://docs.aws.amazon.com/deepracer/latest/developerguide/deepracer-calibrate-vehicle.html)
+* [Getting started with AWS DeepRacer OpenSource](https://github.com/aws-deepracer/aws-deepracer-launcher/blob/main/getting-started.md)
+* [Getting started with the AWS DeepRacer Offroad sample project](https://github.com/aws-deepracer/aws-deepracer-offroad-sample-project/blob/main/getting-started.md)
+* [Instructions for creating QR codes to set up an Offroad path](https://github.com/aws-deepracer/aws-deepracer-offroad-sample-project/blob/main/create-qrcodes-to-setup-offroad-path.md)
+* [Instructions for calibrating your AWS DeepRacer](https://docs.aws.amazon.com/deepracer/latest/developerguide/deepracer-calibrate-vehicle.html)
