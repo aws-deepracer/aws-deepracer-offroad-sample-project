@@ -1,4 +1,4 @@
-# AWS DeepRacer Offroad sample project
+# Getting started with the AWS DeepRacer Offroad sample project
 
 The AWS DeepRacer Offroad sample project is a sample application built on top of the existing AWS DeepRacer application that adds additional capability to the AWS DeepRacer device to autonomously navigate through a path of QR codes by decoding the information in them. Explore the AWS DeepRacer Offroad sample project by cloning the [aws-deepracer-offroad-sample-project](https://github.com/aws-deepracer/aws-deepracer-offroad-sample-project) and get started using the provided [DeepRacer Offroad launcher package](https://github.com/aws-deepracer/aws-deepracer-offroad-sample-project/tree/main/deepracer_offroad_ws/deepracer_offroad_launcher).
 
@@ -8,7 +8,7 @@ The AWS DeepRacer Offroad sample project is a sample application built on top of
 The AWS DeepRacer Offroad sample project showcases a new way to autonomously navigate an AWS DeepRacer device around
 a custom path built using a series of QR codes as waypoints. In order to move along the path, the AWS DeepRacer decodes these QR codes and calculates the direction to move in the next step. You can create your own custom path by placing the waypoint codes as a sequence along the track.
 
-You can encode different kinds of information in these waypoint codes and develop logic to get the AWS DeepRacer to respond accordingly. At the basic level, the Offroad sample project requires the QR codes to provide track edge information based on the position value (left or right) encoded in them. This application also provides logic to mimic a set of *special actions* (“Go straight”, “Hairpin right”, “Hairpin left”, etc.) using detection delta information and action limit values (more details below) encoded in these waypoints. 
+You can encode different kinds of information in these waypoint codes and develop logic to get the AWS DeepRacer to respond accordingly. At the basic level, the Offroad sample project requires the QR codes to provide track edge information based on the position value (left or right) encoded in them. This application also provides logic to mimic a set of *special actions* (“Go straight”, “Hairpin right”, “Hairpin left”, etc.) using detection delta information and action limit values encoded in these waypoints. 
 
 The decoded information in the basic waypoint QR codes is in the following format:
 
@@ -25,18 +25,18 @@ This application also provides logic to respond to special action waypoint codes
 
         'DR: {"wp": 6, "p": "l", "type": "action_start", "delta": [0.0, -0.2], "limit": 35}'
 
-The following additional information is encoded in the preceding JSON object:
+The following additional information is encoded in the preceding JSON object.
 
-1. **Type of waypoint (type)**: Apart from the basic waypoints, we can also have special waypoint types like `action_start` and `action_stop`. The `action_start` type informs the Offroad application to continue to publish the delta value passed as an background ongoing action until it encounters an `action_stop` waypoint. This allows us to build high-level actions like `straight` (delta: [0.0, -0.2]), `hairpin_right` (delta: [1.0., -0.2]), and `hairpin_left` (delta: [-1.0., -0.2]).
+1. **Type of waypoint (type)**: Apart from the basic waypoints, there are also special waypoint types like `action_start` and `action_stop`. The `action_start` type informs the Offroad application to continue to publish the delta value passed as an background ongoing action until it encounters an `action_stop` waypoint. This allows us to build high-level actions like `straight` (delta: [0.0, -0.2]), `hairpin_right` (delta: [1.0., -0.2]), and `hairpin_left` (delta: [-1.0., -0.2]).
 
-1. **Limit the ongoing action (limit)**: This is a positive integer value [1, infinity] which enables you to set a threshold for the number of image frames captured by the AWS DeepRacer's camera before it changes from the ongoing action, initiated by the `action_start` waypoint, to its previous action. Once `action_start` begins, as DeepRacer runs the ongoing action, it counts image frames until it reaches the threshold you’ve set. Then, the car reverts to its previous action, which can be whatever you set it to be. For example, if the previous action is `stop` and the ongoing action with a limit is `go_straight`, the AWS DeepRacer goes straight until the limit is reached and then stops. 
+1. **Limit the ongoing action (limit)**: This is a positive integer value [1, infinity] which enables you to set a threshold for the number of image frames captured by the AWS DeepRacer's camera before it changes from the ongoing action, initiated by the `action_start` waypoint, to its previous action. Once `action_start` begins, as AWS DeepRacer runs the ongoing action, it counts image frames until it reaches the threshold you’ve set. Then, the car reverts to its previous action, which can be whatever you set it to be. For example, if the previous action is `stop` and the ongoing action with a limit is `go_straight`, the AWS DeepRacer goes straight until the limit is reached and then stops. 
 
-Setting these track edge and special actions in a series allows you to create a custom path for the AWS DeepRacer to follow. The hand-off between the waypoints as the AWS DeepRacer goes past the waypoint codes is handled in the `qr_detection_node`. To learn more about how to create or extend the QR codes for your use case, use the [sample guide](https://github.com/aws-deepracer/aws-deepracer-offroad-sample-project/blob/main/create-qrcodes-to-setup-offroad-path.md) and invent your track!
+Setting these track edge and special actions in a series allows you to create a custom path for the AWS DeepRacer to follow. The `qr_detection_node` handles the handoff between the waypoints as the AWS DeepRacer goes past the waypoint codes. To learn more about how to create or extend the QR codes for your use case, use the [sample guide](https://github.com/aws-deepracer/aws-deepracer-offroad-sample-project/blob/main/create-qrcodes-to-setup-offroad-path.md) and invent your track!
 
 
 ## How does it work?
 
-The AWS DeepRacer Offroad application uses many nodes from the AWS DeepRacer core application as is and adds extensions inspired by the Follow the Leader sample project to the shared nodes. This application is built to work alongside the AWS DeepRacer core application so that you can run both of the applications simultaneously.
+The AWS DeepRacer Offroad application uses many nodes from the AWS DeepRacer core application as is and adds extensions inspired by the Follow the Leader (FTL) sample project to the shared nodes. This application is built to work alongside the AWS DeepRacer core application so that you can run both of the applications simultaneously.
 
 * **AWS DeepRacer core packages used without modification**
     * `camera_pkg`
@@ -85,7 +85,7 @@ There are six packages (ROS nodes) that are of importance for the AWS DeepRacer 
 
 The AWS Deepracer Offroad sample project introduces a new mode of operation (`offroad` mode) in the AWS DeepRacer device in addition to the existing modes of operation (`autonomous mode`, `calibration mode`, and `manual` mode). For more information about the existing modes of operation in the AWS DeepRacer device, see  [AWS DeepRacer application: Modes of operation](https://github.com/aws-deepracer/aws-deepracer-launcher/blob/main/modes-of-operation.md).  
 
-In the `offroad` mode, the AWS DeepRacer device takes the camera image input from the front-facing camera connected to the car and runs QR detection to identify a QR code, decode it, and calculate the information required to plan its action. As in the `autonomous` mode, there is an perception-decision-action step involved here as well: the decision step involves decoding information from the waypoint QR code and calculating appropriate reference deltas. This decoding is done by the QR detection Python wrapper [pyzbar](https://pypi.org/project/pyzbar/) to obtain the bounding box data for the QR code identified in the image and decode the information embedded in it. Each perception-decision-action step involves a pipeline of a series of ROS messages published or subscribed at various nodes. These messages publish the camera image, the QR detection deltas identifying the QR code’s position, and the corresponding action data to go past it.
+In `offroad` mode, the AWS DeepRacer device takes the camera image input from the front-facing camera connected to the car and runs QR detection to identify a QR code, decode it, and calculate the information required to plan its action. As in `autonomous` mode, there is a perception-decision-action step involved as well: the decision step involves decoding information from the waypoint QR code and calculating appropriate reference deltas. This decoding is done by the QR detection Python wrapper [pyzbar](https://pypi.org/project/pyzbar/) to obtain the bounding box data for the QR code identified in the image and decode the information embedded in it. Each perception-decision-action step involves a pipeline of a series of ROS messages published or subscribed at various nodes. These messages publish the camera image, the QR detection deltas identifying the QR code’s position, and the corresponding action data to go past it.
 
 ![deepracer-offroad-flow](/media/deepracer-offroad-flow.png)
 
@@ -98,17 +98,17 @@ For each input image, the node tries to detect and decode a QR code. Based on th
 
 1. If the position encoded in the QR code is `left`:
    
-   The reference point would considered to be on the right of the QR code, so that the AWS DeepRacer can pass it with the identified QR code to its left.
+   The reference point would be considered to be on the right of the QR code, so the AWS DeepRacer can pass it with the identified QR code to its left.
 
    ![deepracer-offroad-qr-detection-bb-left](/media/deepracer-offroad-qr-detection-bb-left.png)
 
-1. If the position encoded is `right`:
+1. If the position encoded in the QR code is `right`:
    
-   The reference point would considered to be on the left of the QR code for the AWS DeepRacer to pass it with the identified QR code to the right.
+   The reference point would be considered to be on the left of the QR code, so the AWS DeepRacer can pass it with the identified QR code to its right.
 
    ![deepracer-offroad-qr-detection-bb-right](/media/deepracer-offroad-qr-detection-bb-right.png)
 
-1. When there are multiple QR codes detected (both left and right positioned)
+1. If there are multiple QR codes detected (and the positions encoded in the QR codes are both `left` and `right`):
 
    ![deepracer-offroad-qr-detection-bb-multipleqr](/media/deepracer-offroad-qr-detection-bb-multipleqr.png)
 
@@ -125,7 +125,7 @@ The AWS DeepRacer Offroad navigation ROS package creates the `deepracer_offroad_
 
 ![deepracer-offroad-navigation-moves](/media/deepracer-offroad-navigation-moves.png)
 
-As an initial step in coming up with the action space to be used for navigation, we have to define valid detection delta ranges that will be supported by the application. The preceding diagram shows the six valid {delta_x, delta_y} ranges that can be passed to the `deepracer_offroad_navigation_node`. The `deepracer_offroad_navigation_node` is designed to work with a negative range of `delta_y` values to ensure the AWS DeepRacer device keeps moving and looking for the next waypoint code by taking forward actions when a waypoint code is detected.
+As an initial step in coming up with the action space to be used for navigation, we have to define valid detection delta ranges that are supported by the application. The preceding diagram shows the six valid {delta_x, delta_y} ranges that can be passed to the `deepracer_offroad_navigation_node`. The `deepracer_offroad_navigation_node` is designed to work with a negative range of `delta_y` values to ensure the AWS DeepRacer device keeps moving and looking for the next waypoint code by taking forward actions when a waypoint code is detected.
 
 These {delta_x, delta_y} values are the difference between the target position and the `CUR_IMG_REF_POINT` calculated from the QR code in the current image. The different detection delta values can be grouped into these high-level actions that can be further used to define more granular actions:
 
@@ -177,7 +177,7 @@ The following image shows a first-person view of how the AWS DeepRacer navigates
 
 ## Possible next steps
 
-The AWS DeepRacer Offroad project is an example of how the individual nodes in the Follow the Leader (FTL) sample project were modified to achieve a different goal. The `object_detection_node` has been modified to replace the machine learning inference step with an object-detection model with a simple Python wrapper for QR code detection. Also, with few tweaks to the `ftl_navigation_node`, we implement the `deepracer_offroad_navigation_node`, which handles the action planning based on detection deltas from the `qr_detection_node`.
+The AWS DeepRacer Offroad project is an example of how the individual nodes in the Follow the Leader (FTL) sample project were modified to achieve a different goal. The `object_detection_node` has been modified to replace the machine learning inference step with an object-detection model with a simple Python wrapper for QR code detection. Also, with a few tweaks to the `ftl_navigation_node`, we implement the `deepracer_offroad_navigation_node`, which handles the action planning based on detection deltas from the `qr_detection_node`.
 
 This way, the individual nodes used in the AWS DeepRacer Offroad sample project or the entire sample project can be used to develop a new feature or racing concept using QR codes.
 
