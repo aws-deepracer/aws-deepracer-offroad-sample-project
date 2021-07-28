@@ -220,7 +220,7 @@ def api_set_drive_mode():
         vehicle_state_req = ActiveStateSrv.Request()
         vehicle_state_req.state = drive_mode_state
         vehicle_state_res = call_service_sync(webserver_node.vehicle_state_cli,
-                                                vehicle_state_req)
+                                              vehicle_state_req)
         if vehicle_state_res and (vehicle_state_res.error == 0):
             return jsonify(success=True)
         else:
