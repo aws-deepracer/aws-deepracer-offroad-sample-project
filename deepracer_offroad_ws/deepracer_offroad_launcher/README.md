@@ -96,6 +96,8 @@ To launch the AWS DeepRacer Offroad sample application as the root user on the A
 
         ros2 launch deepracer_offroad_launcher deepracer_offroad_launcher.py
 
+Once the AWS DeepRacer Offroad sample application is launched, you can follow the steps [here](https://docs.aws.amazon.com/deepracer/latest/developerguide/deepracer-set-up-vehicle-test-drive.html) to open the AWS DeepRacer Vehicle's Device Console and checkout the DeepRacer Offroad mode tab which will help you control the vehicle.
+
 ### Enabling `offroad` mode using the CLI
 
 Once the `deepracer_offroad_launcher` has been kicked off, open a adjacent new terminal as the root user:
@@ -151,7 +153,7 @@ The `MAX_SPEED` scale of the AWS DeepRacer can be modified using a ROS 2 service
 
 ## Launch files
 
-The `deepracer_offroad_launcher.py` included in this package is the main launcher file that launches all the required nodes for the AWS DeepRacer Offroad sample project. This launcher file also includes the nodes from the AWS DeepRacer core application.
+The `deepracer_offroad_launcher.py`, included in this package, is the main launcher file that launches all the required nodes for the AWS DeepRacer Offroad sample project. This launcher file also includes the nodes from the AWS DeepRacer core application.
 
         from launch import LaunchDescription
         from launch_ros.actions import Node
@@ -174,7 +176,10 @@ The `deepracer_offroad_launcher.py` included in this package is the main launche
                 package='camera_pkg',
                 namespace='camera_pkg',
                 executable='camera_node',
-                name='camera_node'
+                name='camera_node',
+                parameters=[
+                    {'resize_images': False}
+                ]
             )
             ctrl_node = Node(
                 package='ctrl_pkg',
@@ -306,6 +311,13 @@ The `deepracer_offroad_launcher.py` included in this package is the main launche
             ld.add_action(webserver_publisher_node)
             ld.add_action(web_video_server_node)
             return ld
+
+
+### Configuration file and parameters
+
+| Parameter name   | Description  |
+| ---------------- |  ----------- |
+| `resize_images` | Set to `True` or `False` depending on if you want to resize the images in camera_pkg |
 
 
 ## Resources
