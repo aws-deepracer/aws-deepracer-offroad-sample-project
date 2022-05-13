@@ -15,7 +15,7 @@ git checkout ros2
 echo ""
 echo "Cloning the rplidar_ros package"
 cd ~/deepracer_ws/aws-deepracer-offroad-sample-project/deepracer_offroad_ws
-git clone https://github.com/youngday/rplidar_ros2.git
+git clone https://github.com/Slamtec/rplidar_ros.git -b ros2
 echo ""
 echo "Install python library for QR Code detection"
 pip3 install pyzbar
